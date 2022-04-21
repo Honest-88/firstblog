@@ -1,0 +1,14 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block branding %}
+    <h1 id="head">
+        <a href="{% url 'index' %}">
+        <img src="{% static 'assets/images/logo/logo.png' %} " alt="logo_image" class="brand_img" height="50" width="200">
+        </a>
+    </h1>
+{% endblock %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static '\assets\css/admin.css' %}">
+{% endblock %}

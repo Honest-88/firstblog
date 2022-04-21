@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% load social_share %}
+
+{% block title %} {{posts.name}} {% endblock %}
+
+{% block content %}
+
+<!-- ==========Page Header Section Start Here========== -->
+<section class="page-header-section style-1">
+    <div class="container">
+        <div class="page-header-content">
+            <div class="page-header-inner">
+                <div class="page-title">
+                    <h2>Post No: {{ posts.position }} - {{ posts.name }}</h2>
+                </div>
+                <ol class="breadcrumb">
+                    <br><br>
+                    
+                    <li><a href="#">Found In {{ posts.category }}</a></li>  
+                                 
+                </ol>
+            </div>
+        </div> 
+    </div>
+</section>
+<!-- ==========Page Header Section Ends Here========== -->
+                              
+<!-- ==========Blog Section start Here========== -->
+<section class="blog-section padding-top padding-bottom">
+    <div class="container">
+        <div class="main-blog">
+            <div class="row g-5">
+                <div class="col-xl-9 col-12">
+                    <div class="blog-wrapper">
+                        <div class="post-item">
+                            <div class="post-item-inner">                               
+                                <div class="post-content" align="center">
+                                    <span class="meta" style="color:#ffffff">
+                                        Created By: {{ posts.created_by.username|title }} | Posted {{ posts.created_at|timesince }} Ago                                 
+                                    </span>        
+                                    <h4 style="color: rgb(255, 111, 0);">SPREAD THE LOVE - SHARE THIS AMAIZING POST:</h4>
+                                    {% post_to_facebook object_or_url "Post to Facebook!" %}
+                                    {% post_to_twitter "Find this amazing site to download free Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WebPress Themes Online Tutorials and much more ... {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+                                    {% post_to_linkedin object_or_url %}
+                                    {% send_email object.title "Find this amazing site to download free Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WebPress Themes Online Tutorials and much more ... {{object.title}}. Check it out!" object_or_url "Share via email" %}
+                                    {% post_to_reddit "Find this amazing site to download free Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WebPress Themes Online Tutorials and much more ... {{object.title}}" object_or_url %}
+                                    {% post_to_telegram "Find this amazing site to download free Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WebPress Themes Online Tutorials and much more ... {{object.title}}" object_or_url %}
+                                    {% post_to_whatsapp "Find this amazing site to download free Creative resources: softwares, plugins, VFX, Graphic Design, HTML templates, WebPress Themes Online Tutorials and much more ..." object_or_url "Share via WhatsApp" %}
+                                    {% save_to_pinterest object_or_url %}
+                                    {% add_pinterest_script %}
+                                                              
+                                    <br>
+                                                              
+                                    <div class="lab-thumb me-3 me-md-4">
+                                        <img src="{{ posts.image.url}}" height="10" width="700" alt="img">                                  
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <p>
+                                            {{ posts.description|safe }}
+                                        </p>
+                                    </div>
+                                    <hr>                                 
+                                   
+                                    {% if posts.filelink %}
+                                   
+                                    <a href="{{ posts.filelink }}" download class="btn btn-primary btn-lg"
+                                        style="background-color:#00bcd4;">
+                                        <button type="button" class="btn btn-warning btn-lg btn-bloc">Download File</button>   
+                                    </a>
+                                    <a href="{{ posts.filelink }}" download class="btn btn-primary btn-lg"
+                                    style="background-color:#00bcd4;">
+                                    <button type="button" class="btn btn-warning btn-lg btn-bloc">PASSWORD: 123</button>   
+                                </a>
+
+                                    {% else %}
+                                    <p class="card-text">File Still Uploading</p>
+                                    {% endif %}
+                                    <br><br>
+                                    
+                                    <br><br>
+                                    {% if user.is_superuser %}
+                                    <div class="col-md-6 mb-3 text-center">
+                                        <a href="##"
+                                            class="btn btn-warning btn-lg mr-4 btn-block">Update Lesson</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="#"
+                                            class="btn btn-danger btn-lg mr-4 btn-block"> Delete Lesson </a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-thumb">
+                            <div class="row d-flex justify-content-center mb-4">
+                                <div id="player-overlay">                                  
+                                    {% if posts.video %}
+                                        <video controls width="720" height="360">
+                                            <source src="{{ posts.videolink.url }}" type="video/mp4">
+                                        </video>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="comments" class="comments">
+                            <div class="widget-title">
+                                <br>
+                                <span align="center">
+                                    <h5 style="color: rgb(255, 111, 0);">Questions And Queries</h5>
+                                    <h3 style="color: rgb(255, 111, 0);">Must Be Logged In To Comment Below</h3>
+                                </span>
+                            </div>                                                                       
+                        <div class="container row">
+                            <div class="col-md-6">
+                                <form method="post">
+                                    <div class="form-group">
+                                    {% csrf_token %}
+                                    {{form|crispy}}
+                                    <input type="submit" name="form" value="Add Comment" class="btn btn-primary btn-sm">
+                                    </div>
+                                </form>                             
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for comment in posts.comments.all %}
+                            <div class="col-md-8 mt-2 mb-2">
+                                            <div class="media border p-3">
+                                                <img src="{% static 'Images/user_avatar.png' %}" alt="John Doe" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                                                <div class="media-body">
+                                                        <h4>{{comment.user.username}} <small><i>Commented on: {{comment.date_added}}</i></small></h4>
+                                                        <p>{{comment.body}}</p>
+                                                {% for reply in comment.replies.all %}
+                                                            <div class="media p-3">
+                                                                    <img src="{% static 'Images/user_avatar.png' %}" alt="Jane Doe" class="mr-3 mt-3 rounded-circle" style="width:45px;">
+                                                            <div class="media-body">
+                                                                    <h5>{{reply.user.username}} <small><i>Replied on {{reply.date_added}}</i></small></h5>
+                                                                    <p>{{reply.reply_body}}</p>
+                                                                </div>
+                                                            </div>
+                                                {% endfor %}
+                                                <!-- form to post reply -->
+                                                <form method="post">
+                                                        <input type="hidden" name="comment.id" value="{{comment.id}}">
+                                                        <input type="hidden" name="comment.comm_name" value="{{comment.comm_name}}">
+                                                        {% csrf_token %}
+                                                        {{form2.as_p}}
+                                                        <input type="submit" name="form2" value="Add Reply" class="btn btn-warning btn-sm">
+                                                </form>
+                                                </div>
+                                        </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                       
+                        </div>
+
+                       
+                    </div>
+                </div>
+                <div class="col-xl-3 col-12">
+                    <aside>
+                        <div class="profile-widget search-widget">
+                            <div class="widget-inner">
+                                <div class="widget-title">
+                                    <h5>Search Post</h5>
+                                </div>
+                                <div class="widget-content">
+                                    <p>Search from the newest post collections</p>
+                                    <div class="form-floating nft-search-input">
+                                        <form action="{% url 'school:search_results' %}">
+                                            <input type="search" class="form-control" id="nftSearch"
+                                                placeholder="Search post" name="keyword">
+                                            <label for="nftSearch">Search post</label>
+                                            <button type="button"> <i class="icofont-search-1"></i></button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget widget-category">
+                            <div class="widget-header">
+                                <h5 class="title">Post Category</h5>
+                            </div>
+                            <ul class="widget-wrapper">
+                                {% for category in categories.all %}
+                                <li>
+                                    <a href="{% url 'school:post_list' slug=category.slug category=category.slug %}" class="d-flex flex-wrap justify-content-between"><span><i
+                                                class="icofont-double-right"></i>{{ category.category_name }}</span></a>
+                                </li>
+                                {% endfor %}                              
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ==========Blog Section ends Here========== -->
+
+{% endblock %}

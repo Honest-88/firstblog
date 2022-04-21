@@ -1,0 +1,37 @@
+#header{
+  background-color: rgb(29, 2, 151) !important;
+  color: #ff7700 !important;
+  box-shadow: 0px 0px 3px 0px #2003a5;
+}
+
+#header a:link, #header a:visited{
+  color: rgb(255, 255, 255) !important;
+}
+
+div.breadcrumbs{
+  background-color: #480167;
+}
+
+.module h2, .module caption, .inline-group h2{
+  background-color: #5a04bc;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button{
+  background-color: #ec5a00;
+}
+
+.button:active, input[type=submit]:active, input[type=button]:active, .button:focus, input[type=submit]:focus, input[type=button]:focus, .button:hover, input[type=submit]:hover, input[type=button]:hover{
+  background-color: #ebd7ad;
+}
+
+.button.default, input[type=submit].default, .submit-row input.default{
+  background-color: #6e0ab1;
+}
+
+.button.default:active, input[type=submit].default:active, .button.default:focus, input[type=submit].default:focus, .button.default:hover, input[type=submit].default:hover{
+  background-color: #ab06b1;
+}
+
+a:link, a:visited{
+  color: #020074;
+}

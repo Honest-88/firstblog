@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Contact Us {% endblock %}
+
+
+{% block content %}
+<!-- ==========Page Header Section Start Here========== -->
+<section class="page-header-section style-1">
+  <div class="container">
+      <div class="page-header-content">
+          <div class="page-header-inner">
+              <div class="page-title">
+                  <h2>Contact Us </h2>
+              </div>
+              <ol class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="active">Contact </li>
+              </ol>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- ==========Page Header Section Ends Here========== -->
+
+
+<!-- Contact Us Section Start Here -->
+<div class="contact-section">
+  <div class="contact-top padding-top padding-bottom">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8">
+                  <article class="contact-form-wrapper">
+                      <div class="contact-form">
+                          <h4>Don't Be A Stranger Just Say Hello.</h4>
+                          <p class="mb-5">
+                            We love feedback, it makes us improve and grow with you. Don't afford leaving the site with saying Hie Buddies ...!
+                            To your buttom right there is a Chat Bot where we can respond in real time.
+                            </p>
+                           
+                          <form action="#" method="POST" id="commentform" class="comment-form">
+                              <div class="row g-3">
+                                  <div class="col-md-6">
+                                      <div class="form-floating">
+                                          <input type="text" class="form-control" id="contactName"
+                                              placeholder="Name">
+                                          <label for="contactName">Name</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="form-floating">
+                                          <input type="password" class="form-control" id="floatingPassword"
+                                              placeholder="Password">
+                                          <label for="floatingPassword">Password</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="form-floating">
+                                          <input type="text" class="form-control" id="inputSub"
+                                              placeholder="Subject">
+                                          <label for="inputSub">Subject</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <div class="form-floating">
+                                          <input type="text" class="form-control" id="contactNumber"
+                                              placeholder="Number">
+                                          <label for="contactNumber">Number</label>
+                                      </div>
+                                  </div>
+                                  <div class="col-12">
+                                      <div class="form-floating">
+                                          <textarea class="form-control" placeholder="Message"
+                                              id="msgBox"></textarea>
+                                          <label for="msgBox">Message</label>
+                                      </div>
+                                  </div>
+                              </div>
+
+
+
+
+
+                              <button type="submit" class="default-btn move-right">
+                                  <span>Send Message</span>
+                              </button>
+                          </form>
+                      </div>
+                  </article>
+              </div>
+              <div class="col-lg-4">
+                  <div class="contact-info-wrapper">
+                      <div class="contact-info-title">
+                          <h5>Get In Touch With Us</h5>
+                         
+                      </div>
+                      <div class="contact-info-content">
+                          <div class="contact-info-item">
+                              <div class="contact-info-inner">
+                                  <div class="contact-info-thumb">
+                                      <img src="{% static 'assets/images/contact/01.png' %}" alt="address">
+                                  </div>
+                                  <div class="contact-info-details">
+                                      <span class="fw-bold">Office Address</span>
+                                      <p>Mutare, Zimbabwe</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="contact-info-item">
+                              <div class="contact-info-inner">
+                                  <div class="contact-info-thumb">
+                                      <img src="{% static 'assets/images/contact/02.png' %}" alt="address">
+                                  </div>
+                                  <div class="contact-info-details">
+                                      <span class="fw-bold">Phone Number</span>
+                                      <p>+2778 7123 199</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="contact-info-item">
+                              <div class="contact-info-inner">
+                                  <div class="contact-info-thumb">
+                                      <img src="{% static 'assets/images/contact/03.png' %}" alt="address">
+                                  </div>
+                                  <div class="contact-info-details">
+                                      <span class="fw-bold">Send Mail</span>
+                                      <p>info@allpcsolutions.net</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="contact-info-item">
+                              <div class="contact-info-inner">
+                                  <div class="contact-info-thumb">
+                                      <img src="{% static 'assets/images/contact/04.png' %}" alt="address">
+                                  </div>
+                                  <div class="contact-info-details">
+                                      <span class="fw-bold">Our Website</span>
+                                      <p>www.allpcsolutions.net</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="contact-bottom">
+      <div class="contac-bottom">
+          <div class="row justify-content-center g-0">
+              <div class="col-12">
+                  <div class="location-map">
+                      <div id="map">
+                        <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13503654.658795984!2d18.25671411440083!3d-34.27938932641654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1c34a689d9ee1251%3A0xe85d630c1fa4e8a0!2sSouth%20Africa!5e0!3m2!1sen!2sza!4v1650107729438!5m2!1sen!2sza" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+</div>
+<!-- Contact Us Section ENding Here -->
+
+
+{% endblock %}

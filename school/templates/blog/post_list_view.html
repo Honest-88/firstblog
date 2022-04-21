@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load embed_video_tags %}
+
+{% block title %} {{ posts.name }} {% endblock %}
+
+{% block content %}
+    <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>Find Posts In This Category</h2>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Page Header Section Ends Here========== -->
+
+
+    <!-- ==========Blog Section start Here========== -->
+    <section class="blog-section padding-top padding-bottom">
+        <div class="container">
+            <div class="main-blog">
+                <div class="row">
+                    <div class="col-lg-9 col-12">
+                        <div class="blog-wrapper">
+                          {% for post in categories.posts.all %}
+                            <div class="post-item video-post">
+                                <div class="post-item-inner">                                
+                                    <div class="post-content">
+                                        <a href="{% url 'school:post_detail' post.id %}">   
+                                            <h3>{{ post.name }}</h3>   
+                                        </a>
+                                        <span class="meta" style="color:#ffffff">
+                                            Created By: {{ post.created_by.username|title }} | Posted {{ post.created_at|timesince }} Ago 
+                                        </span>                                   
+                                            <hr>                           
+                                        <div class="lab-thumb me-3 me-md-4">
+                                            <a href="{% url 'school:post_detail' post.id %}">
+                                            <img src="{{ post.image.url|default_if_none:'#' }}" height="10" width="700" alt="img">
+                                            </a>
+                                        </div>
+                                          <hr> 
+                                          <p>{{ post.description|safe|truncatechars:300 }} </p>                       
+                                                                                                                                
+                                        <a href="{% url 'school:post_detail' post.id %}" class="btn btn-primary btn-lg" 
+                                        style="background-color:#00bcd4;">
+                                          <button type="button" class="btn btn-warning btn-lg btn-bloc">Click To Read More ...</button>                                      
+                                        </a>                                                        
+                                    </div>
+                                    <div class="blog-footer">
+                                        <div class="right">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}                      
+                        </div>
+                        <div class="paginations">
+                           
+                            <ul class="lab-ul d-flex flex-wrap justify-content-center mb-1">
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-12">
+                        <aside>
+                            <div class="profile-widget search-widget">
+                                <div class="widget-inner">
+                                    <div class="widget-title">
+                                        <h5>Search Post</h5>
+                                    </div>
+                                    <div class="widget-content">
+                                        <p>Search from the newest post collections</p>
+                                        <div class="form-floating nft-search-input">
+                                            <form action="{% url 'school:search_results' %}">
+                                                <input type="search" class="form-control" id="nftSearch"
+                                                    placeholder="Search post" name="keyword">
+                                                <label for="nftSearch">Search post</label>
+                                                <button type="button"> <i class="icofont-search-1"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="widget widget-category">
+                                                               
+                            </div>
+         
+                            <div class="widget widget-tags">
+                                <div class="widget-header">
+                                    <h5 class="title">Our Popular Tags</h5>
+                                </div>
+                                <ul class="widget-wrapper">
+                                    {% for tag in tags %}
+                                    <li><a href="#">{{tag.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Blog Section ends Here========== -->
+
+
+
+{%endblock%}

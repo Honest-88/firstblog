@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | All PC Solutions - Download Free Resources To Unleash Your Creative Power ...!{% endblock %}
+
+{% block content %}
+   
+    <section class="banner-section">
+        <div class="container">
+            <div class="banner-wrapper">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+                            {% for item in welcome %}
+                            <h1>
+                                <span class="theme-color" data-blast="color" style="font-size:35px">{{ item.title1 }}<br>
+                                    
+                                
+                                    <span style="color: aliceblue; font-size:35px">{{ item.title2 }}</span>
+                            </h1>
+
+                            <p>
+                                {{ item.motto }}                    
+                            </p>
+                            {% endfor %}
+                            <div class="banner-btns d-flex flex-wrap">
+                                <a data-blast="bgColor" href="{% url 'school:category_list' %}"
+                                    class="default-btn move-top"><span>Explore The Site</span> </a>
+                                <a href="{% url 'register' %}" class="default-btn move-right"><span>Create Account</span> </a>
+                                <a href="https://t.me/allpcsolutions" class="default-btn move-right"><span> Daily Updates - Telegram Channel</span> </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="banner-image">
+                            <img src="{% static 'assets/images/banner/banner-img.png' %}" alt="NFT Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ===============//banner section end here \\================= -->
+    <!-- ===============//nft-sell section start here \\================= -->
+    <section class="process-section padding-bottom">
+        <div class="container">
+            <div class="section-header">
+                <div class="header-title">
+                    <span><i class="icofont-bulb-alt" data-blast="color"></i></span>
+                    <h3>Explore Our Categories</h3>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="nft-sell-wrapper">
+                    <div class="row justify-content-center gx-4 gy-2">
+                        {% for category in categories %}  
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="nft-item style-3">
+                                <div class="nft-inner text-center">
+                                    <div class="nft-thumb">
+                                        <a href="{% url 'school:category_list' slug=category.slug %}">
+                                            <img src="{{ category.image.url|default_if_none:'#' }}" alt="nft-img">
+                                        </a>
+                                    </div>
+                                    <div class="nft-content">
+                                        <div class="author-details">
+                                            <a href="{% url 'school:category_list' slug=category.slug %}">
+                                                <h4>{{ category.category_name }}</h4>
+                                                </a>
+                                            <<p>{{ category.description|safe|truncatechars:75 }}</p>                         
+                                            <a href="{% url 'school:category_list' slug=category.slug %}" class="btn btn-primary" btn-sm
+                                                style="background-color:#00bcd4;">
+                                                <p><span><i data-blast="color"></i></span>
+                                                 Read More ...
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        {% endfor %}               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+

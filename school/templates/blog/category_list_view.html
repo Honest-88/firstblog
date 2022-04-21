@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Categories {% endblock %}
+
+
+{% block content %}
+    <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>Choose A Category From List</h2>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'school:category_list' %}">Categories | Categories</a></li>                                   
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Page Header Section Ends Here========== -->
+
+
+    <!-- ==========Activity Section start Here========== -->
+    <section class="activity-section padding-top padding-bottom">
+        <div class="container">
+
+            <div class="section-wrapper">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="section-header">
+                            <h3>List Of Categories</h3>
+                            <div class="nft-filter d-flex flex-wrap justify-content-center gap-15">
+                                <div class="form-floating">
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="activity-wrapper">
+                            <div class="row gy-3">
+                              {% for category in categories.all %}
+                                <div class="col-12">
+                                    <div class="activity-item">
+                                        <div class="lab-inner d-flex flex-wrap align-items-center p-3 p-md-4">
+                                            <div class="lab-thumb me-3 me-md-4">
+                                                <a href="{% url 'school:post_list' slug=category.slug category=category.slug %}">
+                                                <img src="{{ category.image.url|default_if_none:'#' }}" height="100" width="200" alt="img">
+                                                </a>
+                                            </div>
+                                            
+                                            <div class="lab-content">
+                                              <br>
+                                                <h4><a href="{% url 'school:post_list' slug=category.slug category=category.slug %}">{{ category.category_name }}</a>
+                                                </h4>
+                                                <p class="mb-2">
+                                                  {{ category.description|safe|truncatechars:75 }}
+                                                </p>                                       
+                                                <a href="{% url 'school:post_list' slug=category.slug category=category.slug %}" class="btn btn-primary" btn-sm
+                                                style="background-color:#00bcd4;">
+                                                <p><span><i data-blast="color"></i></span>
+                                                  View Posts In Category
+                                                </p>
+                                            </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              {% endfor %}               
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <!-- Aside Part -->
+                    <div class="col-xl-4">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ==========explore Section ends Here========== -->
+
+{%endblock%}

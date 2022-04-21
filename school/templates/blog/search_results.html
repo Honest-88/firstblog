@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load embed_video_tags %}
+
+{% block title %} {{ posts.name }} {% endblock %}
+
+{% block content %}
+
+    <!-- ==========Activity Section start Here========== -->
+    <section class="activity-section padding-top padding-bottom">
+        <div class="container">
+
+            <div class="section-wrapper">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="section-header">                      
+                            <h3> Here Are Results Found:</h3>                          
+                            <div class="nft-filter d-flex flex-wrap justify-content-center gap-15">                             
+                            </div>
+                        </div>
+                        <div class="activity-wrapper">
+                            <div class="row gy-3">
+                                {% for post in posts %}
+                               
+                                <div class="col-12">
+                                    <div class="activity-item">
+                                        
+                                        <div class="lab-inner d-flex flex-wrap align-items-center p-3 p-md-4">                                     
+                                            <div class="lab-thumb me-3 me-md-4">
+                                                <a href="{% url 'school:post_detail' post.id %}">
+                                                    <img src="{{ post.image.url|default_if_none:'#' }}" height="200" width="200" alt="img">
+                                                </a>
+                                                <br><br>
+                                                <h4>
+                                                    <a style="color: rgb(255, 94, 0);" href="{% url 'school:post_detail' post.id %}">{{ post.name }}</a>
+                                                </h4>
+                                            </div>
+                                            <div class="lab-content">
+                                                <p class="mb-2">
+                                                    {{ post.description|safe|truncatechars:100 }}
+                                                </p>
+                                                <p style="color: rgb(255, 94, 0);" class="user-id">Posted By: {{ post.created_by|title }}</p>
+                                                <p style="color: rgb(255, 94, 0);">Posted: {{ post.created_at|timesince }} ago</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>                      
+                        </div>
+                    </div>
+                    <!-- Aside Part -->
+                    <div class="col-xl-4">
+                        <aside class="mt-5 mt-xl-0">
+                            <div class="widget widget-tags">
+                                <div class="widget-header">
+                                    <h5 class="title">Available Categories | Select Your Favourite</h5>
+                                </div>
+
+                                <ul class="widget-wrapper justify-content-start">
+                                    {% for category in categories %}
+                                    <li><a href="{% url 'school:category_list' slug=category.slug %}"><i class="icofont-listine-dots"></i> {{ category.category_name }}</a></li>
+                                   {% endfor %}
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ==========explore Section ends Here========== -->
+
+{% endblock %}
+
+
+

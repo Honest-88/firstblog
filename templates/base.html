@@ -1,0 +1,202 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="author" content="codexcoder">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Meta tags for Social Media(Better SEO) -->
+    <!-- <meta property="og:title" content=""> -->
+    <!-- <meta property="og:type" content=""> -->
+    <!-- <meta property="og:url" content=""> -->
+    <!-- <meta property="og:image" content=""> -->
+
+    <!-- site favicon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/images/favicon.png' %}">
+
+    <!-- ====== All css file ========= -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css//icofont.min.css' %}">
+    <!-- <link rel="stylesheet" href="assets/css/blast.min.css"> -->
+    <link rel="stylesheet" href="{% static 'assets/css/lightcase.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.min.css' %}">
+
+    <!-- site title -->
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+    <!-- preloader start here -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- preloader ending here -->
+
+
+    <!-- ===============// header section start here \\================= -->
+
+    <header class="header">
+        <div class="container-fluid">
+            <div class="header__content">
+                <div class="header__logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'assets/images/logo/logo.png' %}" alt="logo">
+                    </a>
+                </div>
+
+                <form action="{% url 'school:search_results' %}" class="header__search">
+                    <input type="search" placeholder="Search softwares, plugins, templates, tutorials and much more ..." name="keyword">
+                    <a href="">
+                    <button type="button"><i class="icofont-search-2"></i></button>
+                    </a>
+                    <button type="button" class="close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path
+                                d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z" />
+                        </svg></button>
+                </form>
+                <div class="header__menu ms-auto">
+                    <ul class="header__nav mb-0">
+                        <li class="header__nav-item">
+                            <a class="header__nav-link active" href="{% url 'index' %}" role="button" 
+                                aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Home
+                            </a>                      
+                        </li>
+                                                           
+                        <li class="header__nav-item">
+                            <a href="{% url 'dmca' %}" class="header__nav-link">DMCA</a>
+                        </li>
+                        <li class="header__nav-item">
+                            <a href="{% url 'privacy' %}" class="header__nav-link">Privacy Policy</a>
+                        </li>
+                        <li class="header__nav-item">
+                            <a href="{% url 'terms' %}" class="header__nav-link">Terms Of Use</a>
+                        </li>
+                        
+                        <li class="header__nav-item">
+                            <a href="{% url 'about' %}" class="header__nav-link">About</a>
+                        </li>  
+                        <li class="header__nav-item">
+                            <a class="header__nav-link" href="{% url 'contact' %} " role="button" 
+                                aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Contact</a>
+                        </li>               
+                    </ul>
+                </div>
+     
+                <div class="header__actions">
+                    <div class="header__action header__action--search">
+                        <button class="header__action-btn" type="button"><i class="icofont-search-1"></i></button>
+                    </div>
+                    {% if user.is_authenticated %}
+                    <div class="header__action header__action--profile">
+                        <div class="dropdown">
+                            <br><br>
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" data-bs-offset="-100,10">
+                                <span data-blast="bgColor"><i class="icofont-user"></i></span> <span
+                                    class="d-none d-md-inline">{{ user.first_name }}  </span>
+                            </a>                                                 
+                                <a class="header__nav-link" href="{% url 'logout' %}" role="button" 
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">| Logout</a>                         
+                            {% else %}
+                            <li class="header__nav-item">
+                                <a class="header__nav-link" href="{% url 'login' %}" role="button" 
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Login</a>
+                            </li>
+                            <li class="header__nav-item">
+                                <a class="header__nav-link" href="{% url 'register' %}" role="button" 
+                                    aria-haspopup="true" aria-expanded="false" data-bs-offset="0,10">Register</a>
+                            </li>
+                            
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <button class="menu-trigger header__btn" id="menu05">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+ 
+    <!-- ===============//header section end here \\================= -->
+    {% block content %}
+
+
+    {% endblock content %}
+
+    <!-- ===============//footer section start here \\================= -->
+    <footer class="footer-section">
+        <div class="footer-top" style="background-image: url('static/assets/images/footer/bg.jpg');">
+            <div class="footer-newsletter">
+                <div class="container">
+                    <div class="row g-4 align-items-center justify-content-center">
+                        
+                        <div class="col-lg-6">
+                            <div class="social-part ps-lg-5">
+                                <div class="ft-header">
+                                    <h4>Join Our Telegram Community</h4>
+                                </div>
+                                <ul class="social-list d-flex flex-wrap align-items-center mb-0">
+                                    <li class="social-link"><a href="https://t.me/allpcsolutions" data-blast="bgColor"><i
+                                                class="icofont-telegram"></i></a></li>                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+           
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p class="text-center py-4 mb-0"> Copyright &copy;<script>document.write(new Date().getFullYear());</script> || Developped By: <a
+                        href="https://allpcsolutions.net">AllPCSolutions.net -  All rights reserved</a>
+                </p>
+            </div>
+        </div>
+
+    </footer>
+    <!-- ===============//footer section end here \\================= -->
+
+
+
+    <!-- scrollToTop start here -->
+    <a href="#" class="scrollToTop"><i style="color: rgb(254, 3, 3);" class="icofont-stylish-up"></i></a>
+    <!-- scrollToTop ending here -->
+
+
+
+
+    <!-- All Scripts -->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- <script src="assets/js/blast.min.js"></script> -->
+    <script src="{% static 'assets/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/lightcase.js' %}"></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/countdown.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/js/functions.js' %}"></script>
+</body>
+
+</html>

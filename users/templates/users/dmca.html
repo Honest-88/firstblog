@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} About Us {% endblock %}
+
+
+{% block content %}
+
+    <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>Digital Millennium Copyright Act</h2>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="active">Digital Millennium Copyright Act</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Page Header Section Ends Here========== -->
+
+
+    <!-- ==========Blog Section start Here========== -->
+    <section class="blog-section padding-top padding-bottom">
+        <div class="container">
+            <div class="main-blog">
+                <div class="row g-5">
+                    <div class="col-xl-9 col-12">
+                        <div class="blog-wrapper">
+                            <div class="post-item">
+                                {% for item in dmca %}
+                                <div class="post-item-inner">
+                                    <div class="post-thumb">
+                                        <img src="{{ item.image.url }}" alt="blog">
+                                    </div>
+                                   
+                                    <div class="post-content">
+                                        
+                                        <h3>
+                                            {{ item.subject }}
+                                        </h3>
+                                        <p>
+                                            {{ item.about|safe }}
+                                        </p>
+                                        
+                                    </div>
+                                  
+                                </div>
+                                {% endfor %}
+                            </div>                                                   
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-12">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Blog Section ends Here========== -->
+{% endblock content %}
